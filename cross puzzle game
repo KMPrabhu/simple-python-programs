@@ -1,0 +1,63 @@
+# Simple Cross Puzzle Game (Beginner Level)
+def display_board(board):
+    print("\nCross Puzzle Board:")
+    for row in board:
+        print(" ".join(row))
+    print()
+def check_word(board, word, row, col, direction):
+    if direction == "H": 
+        if col + len(word) > len(board[0]):
+            return False
+        for i in range(len(word)):
+            if board[row][col + i] != "_" and board[row][col + i] != word[i]:
+                return False
+
+    elif direction == "V":
+        if row + len(word) > len(board):
+            return False
+        for i in range(len(word)):
+            if board[row + i][col] != "_" and board[row + i][col] != word[i]:
+                return False
+    return True
+def place_word(board, word, row, col, direction):
+    if direction == "H":
+        for i in range(len(word)):
+            board[row][col + i] = word[i]
+    elif direction == "V":
+        for i in range(len(word)):
+            board[row + i][col] = word[i]
+def play_game():
+    board = [
+        ["_", "_", "_", "_", "_"],
+        ["_", "_", "_", "_", "_"],
+        ["_", "_", "_", "_", "_"],
+        ["_", "_", "_", "_", "_"],
+        ["_", "_", "_", "_", "_"]
+    ]
+
+    words = ["CAT", "DOG", "SUN"] 
+
+    print("Welcome to Cross Puzzle Game!")
+    print("Fill the words into the grid.\n")
+
+    for word in words:
+        display_board(board)
+        print(f"Place the word: {word}")
+
+        try:
+            row = int(input("Enter row (0-4): "))
+            col = int(input("Enter column (0-4): "))
+            direction = input("Direction (H for horizontal, V for vertical): ").upper()
+
+            if check_word(board, word, row, col, direction):
+                place_word(board, word, row, col, direction)
+                print("Word placed successfully!\n")
+            else:
+                print("Invalid position! Try again.\n")
+        except:
+            print("Invalid input! Try again.\n")
+
+    print("\nFinal Puzzle:")
+    display_board(board)
+    print("Game Over!")
+play_game()
