@@ -1,0 +1,34 @@
+balance = 10000
+pin = 1234
+
+entered_pin = int(input("Enter PIN: "))
+
+if entered_pin == pin:
+    while True:
+        print("\n1.Check Balance 2.Deposit 3.Withdraw 4.Exit")
+        choice = input("Choose: ")
+
+        if choice == '1':
+            print("Balance:", balance)
+
+        elif choice == '2':
+            amt = float(input("Enter amount: "))
+            balance += amt
+            print("Deposited successfully")
+
+        elif choice == '3':
+            amt = float(input("Enter amount: "))
+            if amt <= balance:
+                balance -= amt
+                print("Withdraw successful")
+            else:
+                print("Not enough balance")
+
+        elif choice == '4':
+            print("Thank you!")
+            break
+
+        else:
+            print("Invalid choice")
+else:
+    print("Wrong PIN!")
